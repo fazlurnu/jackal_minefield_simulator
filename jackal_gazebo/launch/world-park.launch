@@ -1,0 +1,72 @@
+<launch>
+
+  <env name="GAZEBO_MODEL_PATH" value="$GAZEBO_MODEL_PATH:$(find jackal_gazebo)/description" />
+  <env name="GAZEBO_RESOURCE_PATH" value="$GAZEBO_RESOURCE_PATH:$(find jackal_gazebo)/description" /> 
+
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="simple_rviz" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="true"/>
+
+    <!-- Short-term hack to support the original front_laser:=true argument for spawning
+       the simulator. This will be removed in favour of using the config:=x arg instead. -->
+    <arg name="front_laser" default="false" />
+    <arg name="default_config" value="front_laser" if="$(arg front_laser)" />
+    <arg name="default_config" value="base" unless="$(arg front_laser)" /> 
+    <!-- end of hack -->
+
+    <!-- Configuration of Jackal which you would like to simulate.
+       See jackal_description for details. -->
+    <arg name="config" default="$(arg default_config)" />
+
+    <!-- Load Jackal's description, controllers, and teleop nodes. -->
+    <include file="$(find jackal_description)/launch/description.launch">
+      <arg name="config" value="$(arg config)" />
+    </include>
+    <include file="$(find jackal_control)/launch/control.launch" />
+    <include file="$(find jackal_control)/launch/teleop.launch">
+      <arg name="joystick" value="false"/>
+    </include>
+
+    <!-- Spawn Jackal -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+          args="-urdf -model jackal -param robot_description -x 0 -y 0 -z 1.0" />
+
+    <!-- Set the type of terrain-->
+    <!--  <arg name="scenario" default="flatMinefield"/>-->
+    <arg name="scenario" default="softWavyMinefield"/>
+    <!--  <arg name="scenario" default="hardWavyMinefield"/>-->
+
+  <arg name="world" default="$(find jackal_gazebo)/description/worlds/$(arg scenario).world" />
+
+  <!-- set use_sim_time flag -->
+  <group if="$(arg use_sim_time)">
+    <param name="/use_sim_time" value="true" />
+  </group>
+
+  <!-- set command arguments -->
+  <arg unless="$(arg paused)" name="command_arg1" value=""/>
+  <arg     if="$(arg paused)" name="command_arg1" value="-u"/>
+  <arg unless="$(arg headless)" name="command_arg2" value=""/>
+  <arg     if="$(arg headless)" name="command_arg2" value="-r"/>
+  <arg unless="$(arg verbose)" name="command_arg3" value=""/>
+  <arg     if="$(arg verbose)" name="command_arg3" value="--verbose"/>
+  <arg unless="$(arg debug)" name="script_type" value="gzserver"/>
+  <arg     if="$(arg debug)" name="script_type" value="debug"/>
+
+  <!-- start gazebo server-->
+  <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="false" output="screen"
+	args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) $(arg world)">
+    <remap from="tf" to="gazebo_tf"/>
+  </node>
+	
+  <group if="$(arg gui)">
+    <!-- start gazebo client -->
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
+  </group>
+
+</launch>
+
