@@ -1,0 +1,98 @@
+<launch>
+
+  <!-- Open the Gazebo world -->
+  <include file="$(find jackal_gazebo)/launch/world-park.launch">
+    <arg name="gui" value="true" />
+    <arg name="simple_rviz" value="false" />
+  </include>
+
+  <!-- EO Open the Gazebo world -->
+
+  <!-- Setting Up Jackal -->
+  <!-- Short-term hack to support the original front_laser:=true argument for spawning
+      the simulator. This will be removed in favour of using the config:=x arg instead. -->
+  <arg name="front_laser" default="false" />
+  <arg name="default_config" value="front_laser" if="$(arg front_laser)" />
+  <arg name="default_config" value="base" unless="$(arg front_laser)" /> 
+  <!-- end of hack -->
+
+  <!-- Configuration of Jackal which you would like to simulate.
+    See jackal_description for details. -->
+  <arg name="config" default="$(arg default_config)" />
+
+  <!-- Load Jackal's description, controllers, and teleop nodes. -->
+  <include file="$(find jackal_description)/launch/description.launch">
+    <arg name="config" value="$(arg config)" />
+  </include>
+  <include file="$(find jackal_control)/launch/control.launch" />
+  <include file="$(find jackal_control)/launch/teleop.launch">
+    <arg name="joystick" value="false"/>
+  </include>
+
+  <!-- Spawn Jackal -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+    args="-urdf -model jackal -param robot_description -x 0 -y 0 -z 1.0" />
+
+  <node pkg="jackal_gazebo" type="gps_to_odom" name="gps_to_odom"/>
+
+  <!-- EO Setting Up Jackal -->
+
+  <!-- EKF for absolute localization (clearpath) -->
+  <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen">
+      <param name="base_footprint_frame" value="base_link"/>
+      <remap from="robot_pose_ekf/odom_combined" to="robot_pose_ekf/odom"/>
+      <remap from="/odom" to="/jackal_velocity_controller/odom"/>
+      <remap from="gps" to="navsat/odom"/>
+      <param name="output_frame" value="odom"/>
+      <param name="freq" value="100.0"/>
+      <param name="sensor_timeout" value="1.0"/>
+      <param name="odom_used" value="true"/>
+      <param name="imu_used" value="false"/>
+      <param name="imu_absolute" value="false"/>
+      <param name="vo_used" value="false"/>
+      <param name="gps_used" value="false"/>
+      <param name="debug" value="false"/>
+      <param name="self_diagnose" value="false"/>
+  </node>
+
+  <!-- EO EKF for absolute localization (clearpath) -->
+
+  <!-- The minefield frame -->
+  <node name="minefield_static_tf_publisher" pkg="jackal_gazebo" type="minefield_static_tf_publisher" output="screen">
+    <rosparam file="$(find jackal_gazebo)/settings/minefield.yaml" command="load" />
+  </node>
+
+  <node name="minefield_to_odom_tf_publisher" pkg="jackal_gazebo" type="minefield_to_odom_tf.py" />
+
+  <!-- The coil signal simulator - required when not using the real robot -->
+  <node name="coilSignalSimulator" pkg="jackal_gazebo" type="coilSignalSimulator">
+    <rosparam file="$(find jackal_gazebo)/settings/minefield.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/settings/judge.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/description/worlds/coordinates.yaml" command="load" />
+    <param name="~isSimulation" value="true"/>
+  <!--      <remap from="coilSignalSimulator/coils" to="coils"/>-->
+  </node>
+
+  <!-- The HRATC judge -->
+  <node name="judge" pkg="jackal_gazebo"  type="judge"
+    output="screen">
+    <rosparam file="$(find jackal_gazebo)/settings/minefield.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/settings/judge.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/description/worlds/coordinates.yaml" command="load" />
+    <param name="~isSimulation" value="true"/>    
+  </node>
+
+  <!-- The minefield viewer - updates an occupancy grid displaying the covered area -->
+  <node name="mineFieldViewer" pkg="jackal_gazebo"  type="mineFieldViewer"
+    output="screen">
+    <rosparam file="$(find jackal_gazebo)/settings/minefield.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/settings/judge.yaml" command="load" />
+    <rosparam file="$(find jackal_gazebo)/description/worlds/coordinates.yaml" command="load" />
+    <param name="~isSimulation" value="true"/>    
+  </node>
+
+  <!-- Visualization in RVIZ -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jackal_gazebo)/hratc.rviz" /> 
+</launch>
+
+    
