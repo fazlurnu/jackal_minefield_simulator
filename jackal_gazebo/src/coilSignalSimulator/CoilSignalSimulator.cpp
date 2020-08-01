@@ -15,7 +15,7 @@ CoilSignalSimulator::CoilSignalSimulator()
 
     config = new Config(n);
 
-    robotPose = new RobotPose("/minefield","/robot_pose_ekf/odom");
+    robotPose = new RobotPose("/minefield","odometry/filtered");
     trueRobotPose = new TrueRobotPose(n);
 
     canStart.data = true;

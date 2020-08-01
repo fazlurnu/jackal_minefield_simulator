@@ -47,7 +47,7 @@ Judge::Judge()
 //    config = new Config(filename);
     config = new Config(n);
 
-    trueRobotPose = new RobotPose("/minefield","/robot_pose_ekf/odom");
+    trueRobotPose = new RobotPose("/minefield","odometry/filtered");
     //trueRobotPose = new TrueRobotPose(n);
 
     sub_setMine = n->subscribe("/HRATC_FW/set_mine", 100, &Judge::checkMineDetection, this);

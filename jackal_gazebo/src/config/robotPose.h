@@ -60,9 +60,9 @@ public:
     const geometry_msgs::PoseStamped & getRightCoilPose();
 
 private:
-    message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> sub_;
+    message_filters::Subscriber<nav_msgs::Odometry> sub_;
     tf::TransformListener tf_;
-    tf::MessageFilter<geometry_msgs::PoseWithCovarianceStamped> * tf_filter_;
+    tf::MessageFilter<nav_msgs::Odometry> * tf_filter_;
 //    vector< tf::TransformListener* > listeners;
     tf::TransformListener* listener;
     ros::NodeHandle n_;
@@ -79,7 +79,7 @@ private:
     geometry_msgs::PoseStamped emptyPose_;
 
     //  Callback to register with tf::MessageFilter to be called when transforms are available
-    void robotPoseCallback(const boost::shared_ptr<const geometry_msgs::PoseWithCovarianceStamped>& msg);
+    void robotPoseCallback(const boost::shared_ptr<const nav_msgs::Odometry>& msg);
 
 };
 

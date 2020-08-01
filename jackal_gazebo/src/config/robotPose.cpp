@@ -6,7 +6,7 @@ RobotPose::RobotPose(string targetFrame, string inputTopic)
     input_topic_ = inputTopic;
 
     sub_.subscribe(n_, input_topic_, 10);
-    tf_filter_ = new tf::MessageFilter<geometry_msgs::PoseWithCovarianceStamped>(sub_, tf_, target_frame_, 10);
+    tf_filter_ = new tf::MessageFilter<nav_msgs::Odometry>(sub_, tf_, target_frame_, 10);
     tf_filter_->registerCallback( boost::bind(&RobotPose::robotPoseCallback, this, _1) );
 
     listener = new tf::TransformListener;
@@ -40,9 +40,6 @@ const geometry_msgs::PoseStamped & RobotPose::getLocalPose()
 }
 
 //  Callback to register with tf::MessageFilter to be called when transforms are available
-#include <nav_msgs/Odometry.h>
-#include <geometry_msgs/PoseWithCovarianceStamped.h>
-
 void RobotPose::robotPoseCallback(const boost::shared_ptr<const nav_msgs::Odometry>& msg)
 {
     globalPose_.header.frame_id = msg->header.frame_id;
@@ -80,7 +77,7 @@ const vector<geometry_msgs::PoseStamped> & RobotPose::getWheelsPoses()
         return emptyVector;
     }
 
-    wheelsPoses[0].header.frame_id = "p3at_back_left_wheel";
+    wheelsPoses[0].header.frame_id = "rear_left_wheel_link";
     wheelsPoses[0].header.stamp = ros::Time::now();
     wheelsPoses[0].pose.position.x = transform.getOrigin().x();
     wheelsPoses[0].pose.position.y = transform.getOrigin().y();
@@ -98,7 +95,7 @@ const vector<geometry_msgs::PoseStamped> & RobotPose::getWheelsPoses()
         return emptyVector;
     }
 
-    wheelsPoses[1].header.frame_id = "p3at_back_right_wheel";
+    wheelsPoses[1].header.frame_id = "rear_right_wheel_link";
     wheelsPoses[1].header.stamp = ros::Time::now();
     wheelsPoses[1].pose.position.x = transform.getOrigin().x();
     wheelsPoses[1].pose.position.y = transform.getOrigin().y();
@@ -116,7 +113,7 @@ const vector<geometry_msgs::PoseStamped> & RobotPose::getWheelsPoses()
         return emptyVector;
     }
 
-    wheelsPoses[2].header.frame_id = "p3at_front_left_wheel";
+    wheelsPoses[2].header.frame_id = "front_left_wheel_link";
     wheelsPoses[2].header.stamp = ros::Time::now();
     wheelsPoses[2].pose.position.x = transform.getOrigin().x();
     wheelsPoses[2].pose.position.y = transform.getOrigin().y();
@@ -134,7 +131,7 @@ const vector<geometry_msgs::PoseStamped> & RobotPose::getWheelsPoses()
         return emptyVector;
     }
 
-    wheelsPoses[3].header.frame_id = "p3at_front_right_wheel";
+    wheelsPoses[3].header.frame_id = "front_right_wheel_link";
     wheelsPoses[3].header.stamp = ros::Time::now();
     wheelsPoses[3].pose.position.x = transform.getOrigin().x();
     wheelsPoses[3].pose.position.y = transform.getOrigin().y();

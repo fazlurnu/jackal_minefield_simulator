@@ -46,7 +46,7 @@ minefieldViewer::minefieldViewer() :
 //    config = new Config(filename);
     config = new Config(mapNodeHandler);
     
-    trueRobotPose = new RobotPose("/minefield","/robot_pose_ekf/odom");
+    trueRobotPose = new RobotPose("/minefield","odometry/filtered");
     //trueRobotPose = new TrueRobotPose(mapNodeHandler);
 
     // Loading grid with config file data 

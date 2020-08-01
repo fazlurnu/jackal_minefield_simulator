@@ -50,7 +50,7 @@
       <param name="imu_used" value="false"/>
       <param name="imu_absolute" value="false"/>
       <param name="vo_used" value="false"/>
-      <param name="gps_used" value="false"/>
+      <param name="gps_used" value="true"/>
       <param name="debug" value="false"/>
       <param name="self_diagnose" value="false"/>
   </node>
