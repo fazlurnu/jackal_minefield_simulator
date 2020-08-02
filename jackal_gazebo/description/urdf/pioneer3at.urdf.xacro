@@ -9,7 +9,7 @@ name="pioneer3at">
 <!-- Included URDF/XACRO Files -->
 <xacro:include filename="$(find hratc2017_framework)/description/urdf/common.xacro" />
 <xacro:include filename="$(find hratc2017_framework)/description/urdf/sick_tim55x.urdf.xacro" />
-<xacro:include filename="$(find hratc2017_framework)/description/urdf/hokuyo.urdf.xacro" />
+<xacro:include filename="$(find hratc2017_framework)/description/urdf/hokuyo.urdf.xacro"/>
 <xacro:include filename="$(find hratc2017_framework)/description/urdf/mti.urdf.xacro" />
 <xacro:include filename="$(find hratc2017_framework)/description/urdf/gps_antenna.urdf.xacro" />
 <xacro:include filename="$(find metal_detector_msgs)/model/gazebo/metal_detector.urdf.xacro" />
