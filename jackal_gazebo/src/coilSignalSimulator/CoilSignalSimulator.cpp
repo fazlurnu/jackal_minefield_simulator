@@ -29,7 +29,7 @@ CoilSignalSimulator::CoilSignalSimulator()
 
     // simulation settings
     noise = 0.05;
-    minValue = 0.3;
+    minValue = 0.1;
 
     initMetalObjects();
 }
@@ -41,8 +41,8 @@ double random_number(double low, double high)
 
 void CoilSignalSimulator::initMetalObjects()
 {
-    mine.maxValue = 0.8;
-    mine.stdDev = 0.3; //10cm
+    mine.maxValue = 1.0;
+    mine.stdDev = 0.1; //10cm
     mine.eta = mine.maxValue * 1.0/(mine.stdDev * sqrt(2.0*M_PI));
     mine.var = mine.stdDev*mine.stdDev;
 //    cout << "\n\n\n\n\nMINES: " << mine.eta << ' ' << mine.var << "\n\n\n\n" << endl;
@@ -108,6 +108,7 @@ float CoilSignalSimulator::Gaussian(float sqrdist, const metalObject& m)
 void CoilSignalSimulator::computeDistanceToMines()
 {
     // Left coil
+    leftCoilPose = robotPose->getLeftCoilPose();
     cout << "Left ";
     leftValue = minValue + random_number(-noise,noise);
     for(int m=0; m < config->numMines; m++){
@@ -131,6 +132,7 @@ void CoilSignalSimulator::computeDistanceToMines()
         leftValue = 1.0;
 
     // Right coil
+    leftCoilPose = robotPose->getRightCoilPose();
     rightValue = minValue + random_number(-noise,noise);
     for(int m=0; m < config->numMines; m++){
         float sqr_dist = pow(config->minesPositions[m].x - rightCoilPose.pose.position.x, 2.0) +
