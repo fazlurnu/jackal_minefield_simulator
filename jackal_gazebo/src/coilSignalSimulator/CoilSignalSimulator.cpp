@@ -132,7 +132,7 @@ void CoilSignalSimulator::computeDistanceToMines()
         leftValue = 1.0;
 
     // Right coil
-    leftCoilPose = robotPose->getRightCoilPose();
+    rightCoilPose = robotPose->getRightCoilPose();
     rightValue = minValue + random_number(-noise,noise);
     for(int m=0; m < config->numMines; m++){
         float sqr_dist = pow(config->minesPositions[m].x - rightCoilPose.pose.position.x, 2.0) +
