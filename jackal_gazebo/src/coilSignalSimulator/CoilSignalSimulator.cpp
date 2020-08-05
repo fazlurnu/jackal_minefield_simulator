@@ -29,7 +29,7 @@ CoilSignalSimulator::CoilSignalSimulator()
 
     // simulation settings
     noise = 0.05;
-    minValue = 0.1;
+    minValue = 0.2;
 
     initMetalObjects();
 }
@@ -41,7 +41,7 @@ double random_number(double low, double high)
 
 void CoilSignalSimulator::initMetalObjects()
 {
-    mine.maxValue = 1.0;
+    mine.maxValue = 0.8;
     mine.stdDev = 0.1; //10cm
     mine.eta = mine.maxValue * 1.0/(mine.stdDev * sqrt(2.0*M_PI));
     mine.var = mine.stdDev*mine.stdDev;
