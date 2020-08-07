@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <sdf version="1.4">
   <world name="default">
-<!--    <!-- A global light source -->-->
+	<!-- A global light source -->
 <!--    <include>-->
 <!--      <uri>model://sun</uri>-->
 <!--    </include>-->
@@ -283,6 +283,7 @@
       </link>
     </model>
 
+	<!--
     <model name="cornerstone1">
       <static>true</static>
       <link name="cornerstone_link1">
@@ -474,6 +475,7 @@
 	  </visual>
       </link>
     </model>
+	-->
    
   </world>
 </sdf>

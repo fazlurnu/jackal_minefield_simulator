@@ -30,38 +30,39 @@ coordinates:
       x: -0.5
 
 
-  num_obstacles: 8
+  num_obstacles: 0
+  #num_obstacles: 8
 
-  obstacles_positions:
+  #obstacles_positions:
 
-    obstacle1: 
-      y: 1  
-      x: 5
+    #obstacle1: 
+    #  y: 1  
+    #  x: 5
 
-    obstacle2: 
-      y: 1
-      x: 8.5
+    #obstacle2: 
+    #  y: 1
+    #  x: 8.5
 
-    obstacle3: 
-      y: 1
-      x: 9.5
+    #obstacle3: 
+    #  y: 1
+    #  x: 9.5
 
-    obstacle4: 
-      y: -1.5
-      x: 9.5
+    #obstacle4: 
+     # y: -1.5
+      #x: 9.5
 
-    obstacle5: 
-      y: -5
-      x: -0.5
+    #obstacle5: 
+      #y: -5
+      #x: -0.5
 
-    obstacle6: 
-      y: -10
-      x: 9.5
+    #obstacle6: 
+    #  y: -10
+    #  x: 9.5
 
-    obstacle7: 
-      y: -10
-      x: 2.0
+    #obstacle7: 
+    #  y: -10
+    #  x: 2.0
 
-    obstacle8: 
-      y: -10
-      x: 0.5
+    #obstacle8: 
+    #  y: -10
+    #  x: 0.5
