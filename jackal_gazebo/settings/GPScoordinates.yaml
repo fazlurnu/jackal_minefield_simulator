@@ -4,7 +4,7 @@ GPScoordinates:
       longitude: -51.173913575780311191
       altitude: 10
   corners:
-   corner1: 
+      corner1:
           latitude: -30.0601699329
           longitude: -51.1737742479
           altitude: 10

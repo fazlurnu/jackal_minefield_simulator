@@ -64,7 +64,7 @@ void CoilSignalSimulator::initMetalObjects()
     m.var = m.stdDev*m.stdDev;
     otherObjects.push_back(m);
 
-    m.maxValue = 0.4;
+    m.maxValue = 0.3;
     m.stdDev = 0.3; //30cm
     m.x = 3.4;
     m.y = -4.2;
