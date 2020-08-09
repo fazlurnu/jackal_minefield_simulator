@@ -2,6 +2,12 @@
 
 This repository contains the simulation environment of [Jackal](https://github.com/jackal) for [HRATC 2017 Challenge](http://www.inf.ufrgs.br/hratc2017/HRATC2017/Welcome.html).
 
+### Results:
+
+**1. Waypoint Following + Landmine Detection, without Obstalces**
+
+![Jackal](https://github.com/fazlurnu/jackal_minefield_template/blob/master/JackalMinefield.gif)
+
 ### Install Dependencies:
 This is a *manual* way to install necessary packages :
 ```
