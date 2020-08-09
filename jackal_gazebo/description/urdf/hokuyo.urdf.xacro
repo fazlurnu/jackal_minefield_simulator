@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="sensor_hokuyo" xmlns:xacro="http://ros.org/wiki/xacro">
 
-	<xacro:include filename="$(find hratc2017_framework)/description/urdf/common.xacro" />
+	<xacro:include filename="$(find jackal_gazebo)/description/urdf/common.xacro" />
 
     <!-- Hokuyo 2D LIDAR -->
     <xacro:macro name="sensor_hokuyo" params="parent x y z rx ry rz">
@@ -18,13 +18,13 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://hratc2017_framework/description/sensors_meshes/hokuyo.dae"/>
+                    <mesh filename="package://jackal_gazebo/description/sensors_meshes/hokuyo.dae"/>
                 </geometry>
             </collision>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://hratc2017_framework/description/sensors_meshes/hokuyo.dae"/>
+                    <mesh filename="package://jackal_gazebo/description/sensors_meshes/hokuyo.dae"/>
                 </geometry>
             </visual>
             <inertial>
