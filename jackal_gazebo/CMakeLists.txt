@@ -11,7 +11,6 @@ catkin_package(
   DEPENDS gazebo_ros metal_detector_msgs
 )
 
-roslaunch_add_file_check(launch/jackal_world.launch)
 roslaunch_add_file_check(launch/world-park.launch)
 roslaunch_add_file_check(launch/minefield.launch)
 
