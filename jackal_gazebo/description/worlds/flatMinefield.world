@@ -283,7 +283,6 @@
       </link>
     </model>
 
-	<!--
     <model name="cornerstone1">
       <static>true</static>
       <link name="cornerstone_link1">
@@ -475,7 +474,53 @@
 	  </visual>
       </link>
     </model>
-	-->
+	
+	<model name="cornerstone9">
+      <static>true</static>
+      <link name="cornerstone_link4">
+	  <pose>-3 -1 0 0 0 0</pose>
+	  <collision name="cornerstone_collision4">
+	      <geometry>
+		  <mesh>
+		  <uri>model://worlds/models/cornerstone.dae</uri>
+		    <scale>0.5 0.5 0.28</scale>
+		  </mesh>
+	      </geometry>
+	  </collision>
+	  <visual name="cornerstone_visual4">
+	      <geometry>
+		<mesh>
+		  <uri>model://worlds/models/cornerstone.dae</uri>
+		  <scale>0.5 0.5 0.28</scale>
+		</mesh>
+	      </geometry>
+	      <cast_shadows>false</cast_shadows>
+	  </visual>
+      </link>
+    </model>
    
+	<model name="cornerstone10">
+      <static>true</static>
+      <link name="cornerstone_link4">
+	  <pose>-2 1 0 0 0 0</pose>
+	  <collision name="cornerstone_collision4">
+	      <geometry>
+		  <mesh>
+		  <uri>model://worlds/models/cornerstone.dae</uri>
+		    <scale>0.5 0.5 0.28</scale>
+		  </mesh>
+	      </geometry>
+	  </collision>
+	  <visual name="cornerstone_visual4">
+	      <geometry>
+		<mesh>
+		  <uri>model://worlds/models/cornerstone.dae</uri>
+		  <scale>0.5 0.5 0.28</scale>
+		</mesh>
+	      </geometry>
+	      <cast_shadows>false</cast_shadows>
+	  </visual>
+      </link>
+    </model>
   </world>
 </sdf>
