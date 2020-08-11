@@ -479,7 +479,7 @@
       <static>true</static>
       <link name="cornerstone_link4">
 	  <pose>-3 -1 0 0 0 0</pose>
-	  <collision name="cornerstone_collision4">
+	  <collision name="cornerstone_collision9">
 	      <geometry>
 		  <mesh>
 		  <uri>model://worlds/models/cornerstone.dae</uri>
@@ -487,7 +487,7 @@
 		  </mesh>
 	      </geometry>
 	  </collision>
-	  <visual name="cornerstone_visual4">
+	  <visual name="cornerstone_visual9">
 	      <geometry>
 		<mesh>
 		  <uri>model://worlds/models/cornerstone.dae</uri>
@@ -501,9 +501,9 @@
    
 	<model name="cornerstone10">
       <static>true</static>
-      <link name="cornerstone_link4">
+      <link name="cornerstone_link10">
 	  <pose>-2 1 0 0 0 0</pose>
-	  <collision name="cornerstone_collision4">
+	  <collision name="cornerstone_collision10">
 	      <geometry>
 		  <mesh>
 		  <uri>model://worlds/models/cornerstone.dae</uri>
