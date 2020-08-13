@@ -2,6 +2,10 @@
 
 This repository contains the simulation environment of [Jackal](https://github.com/jackal) for [HRATC 2017 Challenge](http://www.inf.ufrgs.br/hratc2017/HRATC2017/Welcome.html).
 
+For this simulation, I changed the rover from the one provided by HRATC 2017 to Jackal. After changing the rover, I added several sensors to the default Jackal platform, including metal detector sensor, camera, and lidar. I also had to change some variables in the code to match the variables published by Jackal.
+
+You can find the navigation alogrithm [here](https://github.com/fazlurnu/jackal_minefield_template)
+
 ### Results:
 
 **1. Waypoint Following + Landmine Detection, without Obstalces**
