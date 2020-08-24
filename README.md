@@ -4,8 +4,7 @@ This repository contains the simulation environment of [Jackal](https://github.c
 
 For this simulation, I changed the rover from the one provided by HRATC 2017 to Jackal. After changing the rover, I added several sensors to the default Jackal platform, including metal detector sensor, camera, and lidar. I also had to change some variables in the code to match the variables published by Jackal.
 
-You can find the navigation alogrithm [here](https://github.com/fazlurnu/jackal_minefield_template)
-
+You can find the navigation alogrithm [here](https://github.com/fazlurnu/jackal_minefield_template). Read the full documentation on [my website](https://fazlurnu.com/2020/08/24/humanitarian-robotics-autonomous-landmine-detection-rover/)!
 ### Results:
 
 **1. Waypoint Following + Landmine Detection, without Obstalces**
